@@ -113,4 +113,25 @@ To make the Bat move, I set the Bat to having the "Kinematic" physics option so 
 
 ## Issues
 
-My main issue was when I tried to make the ball move. Initially, I tried to make the ball move entirely through the code but struggled to figure this out and as a result changed my balls movement to be mainly physics based through the unity engine. I plan on coming back to this project and learning different ways to make the ball move to aid me in future projects.
+My main issue was when I tried to make the ball move. Initially, I tried to make the ball move entirely through the code but struggled to figure this out and as a result changed my balls movement to be mainly physics based through the unity engine. I plan on coming back to this project and learning different ways to make the ball move to aid me in future projects. Previously, I tried this code
+```sh  
+ else if (Input.GetButtonDown("Jump") && transform.position.x < 0 && !moving)
+        {
+
+            moving = true;
+            rb.AddForce(Vector2.up * speed);
+            rb.AddForce(Vector2.left * (speed / 2));
+
+        }
+
+
+        else if (Input.GetButtonDown("Jump") && transform.position.x == 0 && !moving)
+        {
+
+            moving = true;
+            rb.AddForce(Vector2.up * speed);
+
+        }
+``` 
+
+This approach did not work for me, I didn't know where I went wrong so I tried the approach I used above. This leaned more heavily on the unity physics engine than the script which I found easier to work with. The script was used to exert a force to create momentum in one of two directions towards the Bat, and maintained this momentum using the Bounciness feature of the physics material 2d. Initially I set this value to 2, but found that increasing the Bounciness value above 1 would cause it to gain momentum exponentially and fly off the screen. To allow the ball to fly off the bat at an angle, I changed my collider from being a rectangle to being a polygon, so I could create a raised triangle on the top of the bat which disallows the ball to get stuck in a loop going up and down. 
